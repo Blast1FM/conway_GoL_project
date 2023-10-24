@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace golcs;
+namespace golcs.Views;
 
 public partial class MainWindow : Window
 {
