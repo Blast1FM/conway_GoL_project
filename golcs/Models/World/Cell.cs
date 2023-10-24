@@ -8,13 +8,13 @@ public class Cell
 
     public Cell_State cell_state;
 
-    public int neighbour_count;
+    public int living_neighbour_count;
 
     public Cell(int column, int row)
     {
         this.Position = (column, row);
         this.cell_state = Cell_State.Dead;
-        this.neighbour_count = 0;
+        this.living_neighbour_count = 0;
     }
 
 }
