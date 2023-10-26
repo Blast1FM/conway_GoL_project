@@ -17,4 +17,22 @@ public class Cell
         this.living_neighbour_count = 0;
     }
 
+    public void Kill()
+    {
+        cell_state = Cell_State.Dead;
+        living_neighbour_count = 0;
+    }
+
+    public void Revive()
+    {
+        cell_state = Cell_State.Alive;
+        living_neighbour_count = 0;
+    }
+    
+    public bool IsAlive()
+    {
+        if (cell_state == Cell_State.Dead) return false;
+        if (cell_state == Cell_State.Alive) return true;
+        throw new System.Exception("Life check fucked up");
+    }
 }
