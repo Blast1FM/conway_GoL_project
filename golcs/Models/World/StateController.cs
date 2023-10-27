@@ -18,7 +18,7 @@ public static class StateController
     {
         //This would've been used for a more elegant boundary check but oh well
         //(int width, int height) = grid.dimensions;
-        foreach (var (row, column) in Direction.directions)
+        foreach (var (row, column) in Offsets.life_check_offsets)
         {
             try
             {
@@ -43,7 +43,6 @@ public static class StateController
                 Modify_cell_state_for_cell(ref game_state.current_grid, row, column);
             }
         }
-
         game_state.generation_count++;
     }
 
