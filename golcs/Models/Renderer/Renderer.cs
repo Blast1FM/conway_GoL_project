@@ -1,4 +1,7 @@
 namespace golcs.Models.Renderer;
+
+using System;
+using System.Drawing;
 using golcs.Models.World;
 
 public static class Renderer
@@ -12,11 +15,13 @@ public static class Renderer
         new byte[]{ (byte)0, (byte)0, (byte)0, (byte)255 }
     );
 
-    public static int[,] Convert_grid_to_2D_int(Grid grid)
+    public static Bitmap Convert_grid_to_2D_int_and_bitmap(Grid grid)
     {
         (int grid_width, int grid_height) = grid.dimensions;
+        //Each cell is represented by 4 pixels - harcoded for now.
         int bmap_width = grid_width * 4;
         int bmap_height = grid_height * 4;
+        //Stride has to be width * 4
         int stride = bmap_width * 4;
         int[,] integers = new int[bmap_width,bmap_height];
 
@@ -41,7 +46,17 @@ public static class Renderer
                 }
             }
         }
-        return integers;
 
+        unsafe
+        {
+            fixed (int* intPtr = &integers[0,0])
+            {
+                //Well shit, only works on windows :(
+                Bitmap bitmap = new(bmap_width, bmap_height, stride, System.Drawing.Imaging.PixelFormat.Format32bppRgb, new IntPtr(intPtr));
+                return bitmap;
+            }
+        }
+
+        
     }
 }
