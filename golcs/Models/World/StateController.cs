@@ -1,6 +1,12 @@
 namespace golcs.Models.World;
 public static class StateController
 {
+    public static void Update_game_state(ref GameState game_state)
+    {
+        Set_living_neighbour_counters(ref game_state);
+        Modify_cell_states(ref game_state);
+    }
+
     public static void Set_living_neighbour_counters(ref GameState game_state)
     {
         (int width, int height) = game_state.current_grid.dimensions;
