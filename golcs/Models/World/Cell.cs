@@ -12,9 +12,9 @@ public class Cell
 
     public Cell(int column, int row)
     {
-        this.Position = (column, row);
-        this.cell_state = Cell_State.Dead;
-        this.living_neighbour_count = 0;
+        Position = (column, row);
+        cell_state = Cell_State.Dead;
+        living_neighbour_count = 0;
     }
 
     public void Kill()

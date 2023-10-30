@@ -15,7 +15,7 @@ public static class Renderer
         new byte[]{ (byte)0, (byte)0, (byte)0, (byte)255 }
     );
 
-    public static Bitmap Convert_grid_to_2D_int_and_bitmap(Grid grid)
+    public static Bitmap Convert_grid_to_bitmap(Grid grid)
     {
         (int grid_width, int grid_height) = grid.dimensions;
         //Each cell is represented by 4 pixels - harcoded for now.
