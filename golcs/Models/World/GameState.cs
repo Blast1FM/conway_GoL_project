@@ -1,4 +1,7 @@
+using System;
 namespace golcs.Models.World;
+
+[Serializable]
 public class GameState
 {
     public int generation_count;
@@ -17,4 +20,8 @@ public class GameState
         current_grid = new Grid(128,128);
     }
 
+    public GameState(string playername) : this()
+    {
+        player_name = playername;
+    }
 }

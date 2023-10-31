@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace golcs.Models.World;
+
+[Serializable]
 public class Grid
 {
     public (int width, int height) dimensions;

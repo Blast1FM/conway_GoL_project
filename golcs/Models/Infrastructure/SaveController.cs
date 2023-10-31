@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using golcs.Models.World;
 
 namespace golcs.Models.Infrastructure;
@@ -7,7 +8,7 @@ public class SaveController
     public List<GameState>? save_list;
 
     //placeholder - need to figure out pathing and serialisation
-    public bool Load_all_saves()
+    public bool Load_megasave()
     {
         return true;
     }
