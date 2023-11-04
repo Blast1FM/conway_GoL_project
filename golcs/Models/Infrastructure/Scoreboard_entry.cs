@@ -35,4 +35,9 @@ public struct Scoreboard_entry : IComparable<Scoreboard_entry>, IEquatable<Score
         Scoreboard_entry scoreboard_entry_obj = (Scoreboard_entry)obj;
         return Equals(scoreboard_entry_obj);
     }
+
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
+    }
 }
