@@ -10,18 +10,20 @@ public class GameState
 
     public int high_score;
 
+    public int current_live_cells;
+
     public Grid current_grid;
 
-    public GameState()
+    public GameState(string playername="Player")
     {
-        player_name = "Player";
+        player_name = playername;
         high_score = 0;
         generation_count = 0;
         current_grid = new Grid(128,128);
     }
 
-    public GameState(string playername) : this()
-    {
-        player_name = playername;
-    }
+    //public GameState(string playername) : this()
+    //{
+    //      player_name = playername;
+    //}
 }
