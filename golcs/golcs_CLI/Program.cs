@@ -1,9 +1,14 @@
-﻿namespace golcs_CLI;
+﻿using golcs.Renderer;
+using golcs.World;
+
+namespace golcs_CLI;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        GameState gameState = new("Blast", 16);
+
+        Renderer.Display_grid(ref gameState.current_grid);
     }
 }
