@@ -1,4 +1,4 @@
-namespace golcs.Models.World;
+namespace golcs.World;
 public class Offsets
 {
     public static readonly (int row, int column)[] life_check_offsets = 

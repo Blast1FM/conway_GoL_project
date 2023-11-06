@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace golcs.Models.Infrastructure;
+﻿namespace golcs.Infrastructure;
 
 public struct Scoreboard_entry : IComparable<Scoreboard_entry>, IEquatable<Scoreboard_entry>
 {

@@ -1,4 +1,4 @@
-namespace golcs.Models.World.Enums;
+namespace golcs.World.Enums;
 public enum Cell_State
 {
     Dead = 0,

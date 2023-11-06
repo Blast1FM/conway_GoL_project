@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using golcs.Models.World;
+using golcs.World;
 
-namespace golcs.Models.Infrastructure;
+namespace golcs.Infrastructure;
 public class SaveController
 {
-    public List<GameState>? save_list;
+    public List<GameState> save_list;
 
     public SaveController()
     {

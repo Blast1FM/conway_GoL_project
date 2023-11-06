@@ -1,12 +1,21 @@
-using golcs.Models.World.Enums;
+using golcs.World.Enums;
 
-namespace golcs.Models.World;
+namespace golcs.World;
 
 public class Cell 
 {
     public (int, int) Position {get;}
 
     public Cell_State cell_state;
+
+    public string String_repr
+    {
+        get
+        {
+            if(cell_state == Cell_State.Dead) return "X";
+            return "O";
+        }
+    }
 
     public int living_neighbour_count;
 

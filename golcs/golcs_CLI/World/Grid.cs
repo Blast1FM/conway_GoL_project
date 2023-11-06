@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-namespace golcs.Models.World;
+namespace golcs.World;
 
 [Serializable]
 public class Grid
@@ -9,7 +6,7 @@ public class Grid
     public (int width, int height) dimensions;
 
     //beware nullable
-    public List<List<Cell>>? cell_list;
+    public List<List<Cell>> cell_list;
 
     public Grid(int width, int height)
     {

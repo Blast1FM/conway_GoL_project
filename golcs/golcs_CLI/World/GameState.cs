@@ -1,5 +1,4 @@
-using System;
-namespace golcs.Models.World;
+namespace golcs.World;
 
 [Serializable]
 public class GameState
@@ -14,12 +13,12 @@ public class GameState
 
     public Grid current_grid;
 
-    public GameState(string playername="Player")
+    public GameState(string playername="Player", int grid_dim=32)
     {
         player_name = playername;
         high_score = 0;
         generation_count = 0;
-        current_grid = new Grid(128,128);
+        current_grid = new Grid(grid_dim,grid_dim);
     }
 
     //public GameState(string playername) : this()

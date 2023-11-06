@@ -1,4 +1,6 @@
-namespace golcs.Models.World;
+using golcs.World;
+
+namespace golcs.Infrastructure;
 public static class StateController
 {
     public static void Update_game_state(ref GameState game_state)

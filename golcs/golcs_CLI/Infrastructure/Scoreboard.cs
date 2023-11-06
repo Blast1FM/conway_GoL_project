@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using golcs.Models.World;
+using golcs.World;
 
-namespace golcs.Models.Infrastructure;
+namespace golcs.Infrastructure;
 public class Scoreboard
 {
     public List<Scoreboard_entry> entry_list;
