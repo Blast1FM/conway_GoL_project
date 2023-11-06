@@ -1,2 +1,4 @@
 /golcs/obj
 /golcs/bin
+/golcs/*/obj
+/golcs/*/bin
