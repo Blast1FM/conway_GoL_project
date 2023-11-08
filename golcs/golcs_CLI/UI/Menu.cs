@@ -3,6 +3,7 @@
 public class Menu
 {
     private int Selected_index;
+    //TODO try to make generic 
     private string[] Options;
     private string Prompt;
 
