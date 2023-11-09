@@ -6,6 +6,7 @@ using golcs.World;
 namespace golcs.Infrastructure;
 public static class Serialiser
 {
+    //TODO check if it overwrites, make it overwrite if it doesn't
     public static bool Serialise_savelist_and_save_to_file(string filename, List<GameState> save_list)
     {
         IFormatter formatter = new BinaryFormatter();
@@ -24,6 +25,7 @@ public static class Serialiser
     }
 
     //Maybe return an object instead and let the caller handle it?
+    //TODO handle empty stream
     public static List<GameState> Deserialise_savelist_from_file(string filepath)
     {
         IFormatter formatter = new BinaryFormatter();
