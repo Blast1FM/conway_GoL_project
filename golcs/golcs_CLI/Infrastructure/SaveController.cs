@@ -4,10 +4,14 @@ namespace golcs.Infrastructure;
 public class SaveController
 {
     public List<GameState> save_list;
+    public string profile_name;
+    public string profile_save_path;
 
-    public SaveController()
+    public SaveController(string save_path, string p_profile_name="Default_profile_name")
     {
         save_list = new List<GameState>();
+        profile_save_path = save_path;
+        profile_name = p_profile_name;
     }
 
     //placeholder - need to figure out pathing and serialisation

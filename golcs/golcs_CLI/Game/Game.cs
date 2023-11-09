@@ -7,16 +7,22 @@ namespace golcs.Game;
 public class Game
 {
     string? save_dir;
-    List<GameState>? megasave;
-    string current_save_path;
+    SaveController save_controller;
     public Game()
     {
         Initialise_save_dir();
     }
-    public void Start()
+    public void Run()
     {
         Run_init_menu();
-        Run_main_menu();
+        
+        GameState? current_game;            //= null;, but should be null by default
+        do
+        {
+            current_game = Run_main_menu();
+        }while(current_game==null);
+
+        Run_game_loop(current_game);
     }
 
     //Create save folder if doesn't exist
@@ -65,52 +71,75 @@ public class Game
                 break;
         }
     }
-    private void Run_main_menu()
+    private GameState? Run_main_menu()
     {
-        string prompt = $"Current profile: {current_save_path}";
+        string prompt = $"Current profile: {save_controller.profile_name}";
         string[] options = {"Load game","New game","View scoreboard","Exit"};
         Menu menu = new(options, prompt);
         int cmd_id = menu.Run();
         switch (cmd_id)
         {
             case 0:
-                break;
+                //TODO Load game, return gamestate
+                //Use menus like with profiles
+                return null;
             case 1:
-                break;
+                GameState game = Create_new_game();
+                save_controller.Save_game(game);
+                return game;
             case 2:
-                break;
+                View_scoreboard();
+                return null;
             case 3:
                 Exit_game();
-                break;
+                return null;
+            default:
+                return null;
         }
+    }
+
+    //TODO IMPORTANT IMPORTANT IMPORTANT have a check for gen 0, which leads to calling the setup game method first
+    private void Run_game_loop(GameState game)
+    {
+        
+    }
+
+    private void View_scoreboard()
+    {
+        System.Console.WriteLine("WIP. Press any key to return to main menu");
+        Console.ReadKey(true);
+    }
+
+    private GameState Create_new_game()
+    {
+        Console.Clear();
+        System.Console.WriteLine("Enter the player name");
+        string playername = Get_string_input();
+
+        return new GameState(playername);
+
     }
     private void Run_load_megasave_menu(string[] megasaves)
     {
-        string prompt = "Which megasave would you like to load?";
+        string prompt = "Which profile would you like to load?";
         Menu menu = new(megasaves, prompt);
         int cmd_id = menu.Run();
-        current_save_path = megasaves[cmd_id];
+        //Could be done with properties lol
+        save_controller.profile_save_path = megasaves[cmd_id];
         //TODO edge case handling?
-        megasave = Serialiser.Deserialise_savelist_from_file(current_save_path);
+        if(!save_controller.Load_megasave(save_controller.profile_save_path))
+        {
+            throw new System.Exception("Failed to load profile");
+        }
     }
     private void Create_new_megasave()
     {
         Console.Clear();
         System.Console.WriteLine("Enter profile name");
-        while(true)
-        {   //input can be done in a separate helper method but whatever
-            string? input = Console.ReadLine();
-            if(String.IsNullOrEmpty(input))
-            {
-                System.Console.WriteLine("Profile name can't be empty");
-            } else 
-            {
-                megasave = new();
-                current_save_path = Path.Combine(save_dir, input)+".golcs";
-                //TODO handle filenames same as existing saves
-                break;
-            }
-        }
+        string input = Get_string_input();
+        string save_path = Path.Combine(save_dir, input)+".golcs";
+        save_controller = new SaveController(save_path, input);
+        //TODO handle filenames same as existing saves
     }
     private bool Load_megasave()
     {
@@ -131,5 +160,26 @@ public class Game
         Console.Clear();
         System.Console.WriteLine("Thanks for playing!");
         Environment.Exit(0);
+    }
+
+    private string Get_string_input()
+    {
+        while(true)
+        {
+            string? input = Console.ReadLine();
+            if (String.IsNullOrEmpty(input))
+            {
+                System.Console.WriteLine("Invalid input, try again");
+            } else return input;   
+        }
+    }
+
+    private int Get_int_input()
+    {
+        while(true)
+        {
+            if(int.TryParse(Console.ReadLine(), out int number)) return number;
+            else System.Console.WriteLine("Invalid input, try again");
+        }
     }
 }
