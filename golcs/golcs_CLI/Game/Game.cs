@@ -22,7 +22,7 @@ public class Game
             current_game = Run_main_menu();
         }while(current_game==null);
 
-        Run_game_loop(current_game);
+        Run_game_loop(ref current_game);
     }
 
     //Create save folder if doesn't exist
@@ -44,7 +44,7 @@ public class Game
 
     private void Run_init_menu()
     {
-        string prompt = @"
+        const string prompt = @"
  ██████  ██████  ███    ██ ██     ██  █████  ██    ██ ███████      ██████   █████  ███    ███ ███████      ██████  ███████     ██      ██ ███████ ███████ 
 ██      ██    ██ ████   ██ ██     ██ ██   ██  ██  ██  ██          ██       ██   ██ ████  ████ ██          ██    ██ ██          ██      ██ ██      ██      
 ██      ██    ██ ██ ██  ██ ██  █  ██ ███████   ████   ███████     ██   ███ ███████ ██ ████ ██ █████       ██    ██ █████       ██      ██ █████   █████   
@@ -80,13 +80,12 @@ public class Game
         switch (cmd_id)
         {
             case 0:
-                //TODO Load game, return gamestate
-                //Use menus like with profiles
-                return null;
+                var loaded_game = Load_gamestate();
+                return loaded_game;
             case 1:
-                GameState game = Create_new_game();
-                save_controller.Save_game(game);
-                return game;
+                GameState new_game = Create_new_game();
+                save_controller.Save_game(new_game);
+                return new_game;
             case 2:
                 View_scoreboard();
                 return null;
@@ -99,17 +98,49 @@ public class Game
     }
 
     //TODO IMPORTANT IMPORTANT IMPORTANT have a check for gen 0, which leads to calling the setup game method first
-    private void Run_game_loop(GameState game)
+    private void Run_game_loop(ref GameState game)
     {
-        
+        if (game.generation_count==0) Setup_playing_field(ref game);
+
+        //TODO main loop
+
     }
 
+    private void Setup_playing_field(ref GameState game)
+    {
+        //TODO setup playing field
+    }
+    private GameState? Load_gamestate()
+    {
+        Console.Clear();
+        string[]? savenames = save_controller.Return_savenames_as_array();
+        if(savenames==null)
+        {
+            System.Console.WriteLine("No saves found! Press any key to return to main menu.");
+            Console.ReadKey(true);
+            return null;
+        } else
+        {
+            Menu load_menu = new(savenames, "Choose your save");
+            int save_id = load_menu.Run();
+            var game = save_controller.Return_game_state_by_index(save_id);
+            if(game!=null) 
+            {
+                return game;
+            }
+            else 
+            {
+                System.Console.WriteLine("Failed to load game. Press any key to return to main menu");
+                Console.ReadKey(true);
+                return null;
+            }
+        }
+    }
     private void View_scoreboard()
     {
         System.Console.WriteLine("WIP. Press any key to return to main menu");
         Console.ReadKey(true);
     }
-
     private GameState Create_new_game()
     {
         Console.Clear();
@@ -161,7 +192,6 @@ public class Game
         System.Console.WriteLine("Thanks for playing!");
         Environment.Exit(0);
     }
-
     private string Get_string_input()
     {
         while(true)
@@ -173,7 +203,6 @@ public class Game
             } else return input;   
         }
     }
-
     private int Get_int_input()
     {
         while(true)

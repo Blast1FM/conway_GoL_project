@@ -4,7 +4,7 @@ namespace golcs.World;
 
 public class Cell 
 {
-    public (int, int) Position {get;}
+    public (int x, int y) Coords {get;}
 
     public Cell_State cell_state;
 
@@ -21,7 +21,7 @@ public class Cell
 
     public Cell(int column, int row)
     {
-        Position = (column, row);
+        Coords = (column, row);
         cell_state = Cell_State.Dead;
         living_neighbour_count = 0;
     }
@@ -36,6 +36,11 @@ public class Cell
     {
         cell_state = Cell_State.Alive;
         living_neighbour_count = 0;
+    }
+
+    public void Toggle_life_state()
+    {
+        if(IsAlive()) Kill(); else Revive();
     }
     
     public bool IsAlive()

@@ -31,8 +31,31 @@ public class SaveController
         
     }
 
+    public GameState? Return_game_state_by_index(int index)
+    {
+        try
+        {
+            return save_list[index];
+        }
+        catch(IndexOutOfRangeException)
+        {
+            return null;
+        }
+    }
+
+    public string[]? Return_savenames_as_array()
+    {
+        if(save_list.Count==0) return null;
+        string[] save_name_array = new string[save_list.Count];
+        for (int i = 0; i < save_list.Count; i++)
+        {
+            save_name_array[i] = save_list[i].player_name;
+        }
+        return save_name_array;
+    }
+
     //Returns null if save list doesn't exist, or no 
-    public GameState Return_game_state_by_username(string player_name)
+    public GameState? Return_game_state_by_username(string player_name)
     {
         player_name = player_name.Trim();
         if(save_list == null) return null;
