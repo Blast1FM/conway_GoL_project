@@ -71,6 +71,7 @@ public class SaveController
 
     //Helper method for Save_game. Overwrites existing save with the gamestate passed to it. 
     //If the save list is empty or doesn't contain the save youre looking for, returns false.
+    //TODO check this shit
     public bool Overwrite_save(GameState game_state)
     {
         string playername = game_state.player_name;
@@ -101,14 +102,7 @@ public class SaveController
     {
         if(save_list == null) return false;
         filename = filename.Trim();
-        try
-        {
-            Serialiser.Serialise_savelist_and_save_to_file(filename, save_list);
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        Serialiser.Serialise_savelist_and_save_to_file(filename, save_list);
+        return true;
     }
 }

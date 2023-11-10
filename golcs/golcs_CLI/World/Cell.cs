@@ -1,7 +1,7 @@
 using golcs.World.Enums;
 
 namespace golcs.World;
-
+[Serializable]
 public class Cell 
 {
     public (int x, int y) Coords {get;}

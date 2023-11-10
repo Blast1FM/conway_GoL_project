@@ -27,8 +27,11 @@ public class Game
 
             Run_game_loop(ref current_game);
             
-            save_controller.Save_savelist_to_file(save_controller.profile_save_path);
-
+            if(save_controller.Save_savelist_to_file(save_controller.profile_save_path))
+            {
+                System.Console.WriteLine("Game saved successfully. Press any key to continue");
+                Console.ReadKey(true);
+            } else System.Console.WriteLine("Something went wrong when saving.");
         }
     }
 
