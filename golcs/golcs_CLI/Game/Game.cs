@@ -1,9 +1,10 @@
 ﻿using golcs.Infrastructure;
 using golcs.UI;
 using golcs.World;
+using golcs.Renderer;
+using System.Net.Mail;
 
 namespace golcs.Game;
-
 public class Game
 {
     string? save_dir;
@@ -16,13 +17,19 @@ public class Game
     {
         Run_init_menu();
         
-        GameState? current_game;            //= null;, but should be null by default
-        do
+        while(true)
         {
-            current_game = Run_main_menu();
-        }while(current_game==null);
+            GameState? current_game;            //= null;, but should be null by default
+            do
+            {
+                current_game = Run_main_menu();
+            }while(current_game==null);
 
-        Run_game_loop(ref current_game);
+            Run_game_loop(ref current_game);
+            
+            save_controller.Save_savelist_to_file(save_controller.profile_save_path);
+
+        }
     }
 
     //Create save folder if doesn't exist
@@ -102,13 +109,28 @@ public class Game
     {
         if (game.generation_count==0) Setup_playing_field(ref game);
 
-        //TODO main loop
+        //TODO implement configurable tickrate
 
+        while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape))
+        {
+            Renderer.Renderer.Display_game(ref game, "Press escape to exit");
+            StateController.Update_game_state(ref game);
+        }
+        if(!save_controller.Save_game(game))
+        {
+            System.Console.WriteLine("Failed to save game :( Press any key to return to main menu");
+            Console.ReadKey(true);
+        }
     }
 
     private void Setup_playing_field(ref GameState game)
     {
+        var setup_menu = new FieldSetupMenu(game.current_grid,
+        $"Use arrow keys to select a cell. Click enter to toggle its state. Escape to finish setup.{Environment.NewLine}X:Dead O:Alive");
         //TODO setup playing field
+        game.current_grid = setup_menu.Run();
+        StateController.Update_game_state(ref game);
+        Run_game_loop(ref game);
     }
     private GameState? Load_gamestate()
     {
@@ -156,11 +178,12 @@ public class Game
         Menu menu = new(megasaves, prompt);
         int cmd_id = menu.Run();
         //Could be done with properties lol
-        save_controller.profile_save_path = megasaves[cmd_id];
+        string path = megasaves[cmd_id];
+        save_controller = new(path, path[path.LastIndexOf(Path.DirectorySeparatorChar)..]);
         //TODO edge case handling?
         if(!save_controller.Load_megasave(save_controller.profile_save_path))
         {
-            throw new System.Exception("Failed to load profile");
+            System.Console.WriteLine("Failed to load profile!");
         }
     }
     private void Create_new_megasave()
