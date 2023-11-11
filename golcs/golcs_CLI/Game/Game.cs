@@ -93,9 +93,16 @@ public class Game
                 var loaded_game = Load_gamestate();
                 return loaded_game;
             case 1:
-                GameState new_game = Create_new_game();
-                save_controller.Save_game(new_game);
-                return new_game;
+                GameState? new_game = Create_new_game();
+                if(new_game == null)
+                {
+                    System.Console.WriteLine("Save already exists!");
+                    return null;
+                }else
+                {
+                    save_controller.Save_game(new_game);
+                    return new_game;
+                }
             case 2:
                 View_scoreboard();
                 return null;
@@ -172,14 +179,17 @@ public class Game
         System.Console.WriteLine("Press any key to return to main menu");
         Console.ReadKey(true);
     }
-    private GameState Create_new_game()
+    private GameState? Create_new_game()
     {
         Console.Clear();
         System.Console.WriteLine("Enter the player name");
         string playername = Get_string_input();
 
-        return new GameState(playername);
-
+        //hacky workaround
+        if (!Hacks.Get_playernames(save_controller.save_list).Contains(playername))
+        {
+            return new GameState(playername);
+        } else return null;
     }
     private void Run_load_megasave_menu(string[] megasaves)
     {
