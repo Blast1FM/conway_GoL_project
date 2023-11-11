@@ -7,6 +7,8 @@ public class Scoreboard
 
     public void Display_scoreboard()
     {
+        Console.Clear();
+        System.Console.WriteLine("Scoreboard:");
         foreach (var item in entry_list)
         {
             System.Console.WriteLine(item);

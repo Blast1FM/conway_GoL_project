@@ -75,6 +75,7 @@ public class Game
                 break;
             case 1:
                 Create_new_megasave();
+                save_controller.Save_savelist_to_file(save_controller.profile_save_path);
                 break;
             case 2:
                 Exit_game();
@@ -175,9 +176,17 @@ public class Game
     {
         Scoreboard scoreboard = new();
         scoreboard.Populate_scoreboard_list(save_controller.save_list);
-        scoreboard.Display_scoreboard();
-        System.Console.WriteLine("Press any key to return to main menu");
-        Console.ReadKey(true);
+        if(scoreboard.entry_list.Any())
+        {
+            scoreboard.Display_scoreboard();
+            System.Console.WriteLine("Press any key to return to main menu");
+            Console.ReadKey(true);
+        } else
+        {
+            System.Console.WriteLine("The scoreboard is empty");
+            System.Console.WriteLine("Press any key to return to main menu");
+            Console.ReadKey(true);
+        }
     }
     private GameState? Create_new_game()
     {
@@ -208,10 +217,18 @@ public class Game
     private void Create_new_megasave()
     {
         Console.Clear();
-        System.Console.WriteLine("Enter profile name");
-        string input = Get_string_input();
-        string save_path = Path.Combine(save_dir, input)+".golcs";
-        save_controller = new SaveController(save_path, input);
+        while(true)
+        {
+            System.Console.WriteLine("Enter profile name");
+            string input = Get_string_input();
+            string save_path = Path.Combine(save_dir, input)+".golcs";
+            if(!File.Exists(save_path)) 
+            {
+                save_controller = new SaveController(save_path, input);
+                break;
+            } System.Console.WriteLine("Profile already exists, try again");
+            
+        }
         //TODO handle filenames same as existing saves
     }
     private bool Load_megasave()

@@ -6,7 +6,7 @@ using golcs.World;
 namespace golcs.Infrastructure;
 public static class Serialiser
 {
-    //TODO check if it overwrites, make it overwrite if it doesn't
+    //TODO check if it overwrites, make it overwrite if it doesn't (it does)
     public static bool Serialise_savelist_and_save_to_file(string filename, List<GameState> save_list)
     {
         IFormatter formatter = new BinaryFormatter();
