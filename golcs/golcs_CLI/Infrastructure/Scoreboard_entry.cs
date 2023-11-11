@@ -37,4 +37,6 @@ public struct Scoreboard_entry : IComparable<Scoreboard_entry>, IEquatable<Score
     {
         throw new NotImplementedException();
     }
+
+    public override string ToString()=> $"Name:{Playername} Highscore: {High_score} Generation:{Generation_count}";
 }

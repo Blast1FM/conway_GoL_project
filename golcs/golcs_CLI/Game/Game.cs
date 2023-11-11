@@ -166,7 +166,10 @@ public class Game
     }
     private void View_scoreboard()
     {
-        System.Console.WriteLine("WIP. Press any key to return to main menu");
+        Scoreboard scoreboard = new();
+        scoreboard.Populate_scoreboard_list(save_controller.save_list);
+        scoreboard.Display_scoreboard();
+        System.Console.WriteLine("Press any key to return to main menu");
         Console.ReadKey(true);
     }
     private GameState Create_new_game()
