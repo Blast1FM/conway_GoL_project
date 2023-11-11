@@ -66,21 +66,29 @@ public static class StateController
         {
             if(current_cell.living_neighbour_count < 2 || current_cell.living_neighbour_count > 3)
             {
-                current_cell.Kill();
-                gamestate.current_live_cells--;
+                if(current_cell.Kill())
+                {
+                    gamestate.current_live_cells--;
+                }
             } else 
             {
-                current_cell.Revive(); 
-                gamestate.current_live_cells++;
+                if(current_cell.Revive())
+                {
+                    gamestate.current_live_cells++;
+                } 
             }
         } else if (current_cell.living_neighbour_count == 3)
         {
-            current_cell.Revive();
-            gamestate.current_live_cells++;
+            if(current_cell.Revive())
+            {
+                gamestate.current_live_cells++;
+            }
         } else 
         {
-            current_cell.Kill();
-            gamestate.current_live_cells--;
+            if(current_cell.Kill())
+            {
+                gamestate.current_live_cells--;
+            }
         }
     }
 }

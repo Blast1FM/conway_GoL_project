@@ -26,16 +26,28 @@ public class Cell
         living_neighbour_count = 0;
     }
 
-    public void Kill()
-    {
+    public bool Kill()
+    {   
+        if(cell_state == Cell_State.Dead)
+        {
+            living_neighbour_count = 0;
+            return false;
+        }
         cell_state = Cell_State.Dead;
         living_neighbour_count = 0;
+        return true;
     }
 
-    public void Revive()
+    public bool Revive()
     {
+        if(cell_state == Cell_State.Alive)
+        {
+            living_neighbour_count = 0;
+            return false;
+        };
         cell_state = Cell_State.Alive;
         living_neighbour_count = 0;
+        return true;
     }
 
     public void Toggle_life_state()
