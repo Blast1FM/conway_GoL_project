@@ -20,6 +20,20 @@ public class Grid
         this.dimensions = other.dimensions;
         this.cell_list = other.cell_list;
     }
+    //Quick hack because im stupid
+    public int Count_living_cells()
+    {
+        int living_cell_count = 0;
+        foreach (var item in cell_list)
+        {
+            foreach (var cell in item)
+            {
+                if (cell.IsAlive()) living_cell_count++;
+            }
+        }
+
+        return living_cell_count;
+    }
 
     public void Initialise_cell_list_as_dead()
     {

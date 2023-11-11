@@ -134,6 +134,7 @@ public class Game
         $"Use arrow keys to select a cell. Click enter to toggle its state. Escape to finish setup.{Environment.NewLine}X:Dead O:Alive");
         //TODO setup playing field
         game.current_grid = setup_menu.Run();
+        game.current_live_cells = game.current_grid.Count_living_cells();
         StateController.Update_game_state(ref game);
         Run_game_loop(ref game);
     }
