@@ -1,6 +1,9 @@
 using golcs.World;
 
 namespace golcs.Infrastructure;
+/// <summary>
+/// Handles game saves
+/// </summary>
 public class SaveController
 {
     public List<GameState> save_list;

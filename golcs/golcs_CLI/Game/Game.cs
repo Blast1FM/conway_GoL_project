@@ -5,6 +5,9 @@ using golcs.Renderer;
 using System.Net.Mail;
 
 namespace golcs.Game;
+/// <summary>
+/// Main game driver code
+/// </summary>
 public class Game
 {
     string? save_dir;
@@ -19,7 +22,8 @@ public class Game
         
         while(true)
         {
-            GameState? current_game;            //= null;, but should be null by default
+            GameState? current_game;            
+            // = null;, but should be null by default
             do
             {
                 current_game = Run_main_menu();
@@ -35,7 +39,9 @@ public class Game
         }
     }
 
-    //Create save folder if doesn't exist
+    /// <summary>
+    /// Create save folder if doesn't exist.
+    /// </summary>
     private void Initialise_save_dir()
     {
         string cwd = Directory.GetCurrentDirectory();
@@ -172,6 +178,9 @@ public class Game
             }
         }
     }
+    /// <summary>
+    /// Generates and displays the scoreboard
+    /// </summary>
     private void View_scoreboard()
     {
         Scoreboard scoreboard = new();
@@ -205,10 +214,10 @@ public class Game
         string prompt = "Which profile would you like to load?";
         Menu menu = new(megasaves, prompt);
         int cmd_id = menu.Run();
-        //Could be done with properties lol
+        // Could be done with properties lol.
         string path = megasaves[cmd_id];
         save_controller = new(path, path[path.LastIndexOf(Path.DirectorySeparatorChar)..]);
-        //TODO edge case handling?
+        // TODO edge case handling?
         if(!save_controller.Load_megasave(save_controller.profile_save_path))
         {
             System.Console.WriteLine("Failed to load profile!");

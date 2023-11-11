@@ -1,4 +1,7 @@
 namespace golcs.World;
+/// <summary>
+/// Used for state controller's calculations
+/// </summary>
 public class Offsets
 {
     public static readonly (int row, int column)[] life_check_offsets = 

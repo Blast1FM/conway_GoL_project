@@ -1,5 +1,8 @@
 ﻿namespace golcs.Infrastructure;
 
+/// <summary>
+/// Represents a highscore entry, implements comparison operators to sort in the scoreboard
+/// </summary>
 public struct Scoreboard_entry : IComparable<Scoreboard_entry>, IEquatable<Scoreboard_entry>
 {
     public string Playername {get; set;}

@@ -1,6 +1,9 @@
 using golcs.World;
 
 namespace golcs.Infrastructure;
+/// <summary>
+/// Piss scoreboard implementation
+/// </summary>
 public class Scoreboard
 {
     public List<Scoreboard_entry> entry_list;

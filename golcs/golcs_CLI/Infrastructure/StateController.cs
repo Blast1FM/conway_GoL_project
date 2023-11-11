@@ -1,6 +1,10 @@
 using golcs.World;
 
 namespace golcs.Infrastructure;
+
+/// <summary>
+/// Updates game state - GoL logic here.
+/// </summary>
 public static class StateController
 {
     public static void Update_game_state(ref GameState game_state)

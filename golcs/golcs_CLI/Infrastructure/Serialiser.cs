@@ -4,6 +4,10 @@ using golcs.World;
 
 #pragma warning disable SYSLIB0011
 namespace golcs.Infrastructure;
+
+/// <summary>
+/// Used to save profiles to file
+/// </summary>
 public static class Serialiser
 {
     //TODO check if it overwrites, make it overwrite if it doesn't (it does)

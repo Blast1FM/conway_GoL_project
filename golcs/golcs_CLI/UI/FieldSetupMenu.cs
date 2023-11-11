@@ -1,6 +1,9 @@
 ﻿using golcs.World;
 namespace golcs.UI;
 
+/// <summary>
+/// Menu used to setup the initial gamestate
+/// </summary>
 public class FieldSetupMenu
 {
     private string Prompt;

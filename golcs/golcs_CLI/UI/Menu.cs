@@ -1,5 +1,8 @@
 ﻿namespace golcs.UI;
 
+/// <summary>
+/// Customisable menu
+/// </summary>
 public class Menu
 {
     private int Selected_index;
