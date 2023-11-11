@@ -28,7 +28,7 @@ public static class Renderer
 
     public static void Display_game(ref GameState gameState)
     {
-        Console.Clear();
+        System.Console.Clear();
         Display_game_stats(ref gameState);
         Display_grid(ref gameState.current_grid);
         Display_bottom_bar("placeholder");
@@ -36,7 +36,7 @@ public static class Renderer
 
     public static void Display_game(ref GameState gameState, string bottom_bar_text)
     {
-        Console.Clear();
+        System.Console.Clear();
         Display_game_stats(ref gameState);
         Display_grid(ref gameState.current_grid);
         Display_bottom_bar(bottom_bar_text);

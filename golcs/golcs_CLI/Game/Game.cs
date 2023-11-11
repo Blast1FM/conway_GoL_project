@@ -115,9 +115,11 @@ public class Game
         //TODO implement configurable tickrate
 
         while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape))
-        {
+        {   
+            Console.Clear();
             Renderer.Renderer.Display_game(ref game, "Press escape to exit");
             StateController.Update_game_state(ref game);
+            System.Threading.Thread.Sleep(200);
         }
         if(!save_controller.Save_game(game))
         {
