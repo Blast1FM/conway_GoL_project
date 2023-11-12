@@ -32,8 +32,7 @@ public struct Scoreboard_entry : IComparable<Scoreboard_entry>, IEquatable<Score
     //Haha null go brrrr
     public override bool Equals(object? obj)
     {
-        Scoreboard_entry scoreboard_entry_obj = (Scoreboard_entry)obj;
-        return Equals(scoreboard_entry_obj);
+        throw new NotImplementedException();
     }
 
     public override int GetHashCode()

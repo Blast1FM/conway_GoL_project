@@ -11,6 +11,7 @@ public class Grid
     public Grid(int width, int height)
     {
         dimensions = (width, height);
+        cell_list = new List<List<Cell>>(dimensions.height);
         Initialise_cell_list_as_dead();
     }
 
@@ -24,6 +25,7 @@ public class Grid
     public int Count_living_cells()
     {
         int living_cell_count = 0;
+        if(cell_list==null) throw new Exception("Grid doesnt exist");
         foreach (var item in cell_list)
         {
             foreach (var cell in item)
@@ -37,8 +39,6 @@ public class Grid
 
     public void Initialise_cell_list_as_dead()
     {
-        //Pre-initialise the list
-        cell_list = new List<List<Cell>>(dimensions.height);
         for (int i=0; i < dimensions.height; i++)
         {
             cell_list.Add(new List<Cell>(dimensions.width));

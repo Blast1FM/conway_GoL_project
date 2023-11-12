@@ -10,8 +10,9 @@ namespace golcs.Game;
 /// </summary>
 public class Game
 {
-    string? save_dir;
+    string save_dir;
     SaveController save_controller;
+    // Is not null in Initialise_Save_dir, save dir too
     public Game()
     {
         Initialise_save_dir();

@@ -21,6 +21,7 @@ public class FieldSetupMenu
     private void DisplayOptions()
     {
         System.Console.WriteLine(Prompt);
+        if(Game_field==null) return;
         for (int row = 0; row < Game_field.cell_list.Count; row++)
         {
             for(int column = 0; column < Game_field.cell_list[row].Count; column++)
