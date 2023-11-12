@@ -83,7 +83,7 @@ public class FieldSetupMenu
                     Selected_index.x--;
                     if(Selected_index.x<0)
                     {
-                        Selected_index.y = Game_field.dimensions.width-1;
+                        Selected_index.x = Game_field.dimensions.width-1;
                     }
                     break;
                 case ConsoleKey.RightArrow:
