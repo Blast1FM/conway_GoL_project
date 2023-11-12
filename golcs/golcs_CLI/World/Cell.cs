@@ -12,7 +12,7 @@ public class Cell
     {
         get
         {
-            if(cell_state == Cell_State.Dead) return "X";
+            if(cell_state == Cell_State.Dead) return " ";
             return "O";
         }
     }

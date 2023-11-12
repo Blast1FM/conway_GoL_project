@@ -10,6 +10,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        System.Console.CursorVisible = false;
         Game game = new();
         game.Run();
     }
