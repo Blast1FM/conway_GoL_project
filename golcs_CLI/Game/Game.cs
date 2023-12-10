@@ -193,6 +193,7 @@ public class Game
             Console.ReadKey(true);
         } else
         {
+            Console.Clear();
             System.Console.WriteLine("The scoreboard is empty");
             System.Console.WriteLine("Press any key to return to main menu");
             Console.ReadKey(true);
