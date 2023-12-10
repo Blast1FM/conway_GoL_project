@@ -1,5 +1,3 @@
-/golcs/obj
-/golcs/bin
-/golcs/*/obj
-/golcs/*/bin
-/golcs_saves
+*/obj
+*/bin
+*/golcs_saves
